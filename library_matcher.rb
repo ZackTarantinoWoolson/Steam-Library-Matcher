@@ -28,13 +28,15 @@ end
 
 friends_hash = Hash.new
 
-get_friends_list.each do |friend|
+friends_list = get_friends_list
+
+friends_list.each_with_index do |friend,index|
     temp_array = Array.new
     friends_games = Array.new
-    
-    player_summary = get_player_summaries(friend['steamid'])
-    p player_summary['personaname']
 
+    p "#{index}/#{friends_list.size}"
+
+    player_summary = get_player_summaries(friend['steamid'])
     owned_games = get_owned_games(player_summary['steamid'])
     
     unless owned_games.nil? 
@@ -49,4 +51,3 @@ get_friends_list.each do |friend|
     friends_hash[player_summary['personaname']] = temp_array
 end
 
-p friends_hash
